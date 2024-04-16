@@ -9,7 +9,7 @@ plugins {
 	kotlin("plugin.allopen") version "1.9.22"
 }
 
-allOpen{
+allOpen {
 	annotation("jakarta.persistence.Entity")
 	annotation("jakarta.persistence.Embeddable")
 	annotation("jakarta.persistence.MappedSuperclass")
