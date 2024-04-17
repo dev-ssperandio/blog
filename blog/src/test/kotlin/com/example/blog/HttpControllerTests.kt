@@ -4,7 +4,6 @@ import com.ninjasquad.springmockk.MockkBean
 import io.mockk.every
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest
 import org.springframework.test.web.servlet.MockMvc
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get
@@ -40,12 +39,10 @@ class HttpControllerTests(@Autowired val mockMvc: MockMvc) {
         val sidney = User("SSperandio", "Sidney", "Sperandio")
         val ivanessa = User("IDantas", "Ivanessa", "Dantas")
         every { userRepository.findAll() } returns listOf(sidney, ivanessa)
-
         mockMvc.perform(get("/api/user/").accept(MediaType.APPLICATION_JSON))
             .andExpect(status().isOk)
             .andExpect(content().contentType(MediaType.APPLICATION_JSON))
             .andExpect(jsonPath("\$.[0].login").value(sidney.login))
             .andExpect(jsonPath("\$.[1].login").value(ivanessa.login))
     }
-
 }
